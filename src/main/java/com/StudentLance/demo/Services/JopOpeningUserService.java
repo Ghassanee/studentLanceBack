@@ -93,7 +93,7 @@ public class JopOpeningUserService {
 
             for(int i = 0; i < jobStatus.size(); i++){
                 ModelMap m = new ModelMap();
-                m.addAttribute("applicationId", jobStatus.get(i).getJob_userId());
+                m.addAttribute("applicationId", jobStatus.get(i).getJobUserId());
                 m.addAttribute("jobId", jobStatus.get(i).getJobId());
                 m.addAttribute("userId", jobStatus.get(i).getUserId());
                 m.addAttribute("status", jobStatus.get(i).getStatus());
@@ -204,7 +204,7 @@ public class JopOpeningUserService {
                 for(int i = 0; i < job_applications.size(); i++){
                     ModelMap m = new ModelMap();
 
-                    m.addAttribute("applicationID", job_applications.get(i).getJob_userId());
+                    m.addAttribute("applicationID", job_applications.get(i).getJobUserId());
                     m.addAttribute("jobid", job_applications.get(i).getJobId());
                     m.addAttribute("companyid", job_applications.get(i).getCompanyId());
                     m.addAttribute("userid", job_applications.get(i).getUserId());
@@ -265,7 +265,7 @@ public class JopOpeningUserService {
 
         try {
 
-            JobOpening_User jobOpening_user = jobOpening_userDao.findByJob_userId(applicationId);
+            JobOpening_User jobOpening_user = jobOpening_userDao.findByJobUserId(applicationId);
 
             if(status.contains("Company")){
 
@@ -444,7 +444,7 @@ public class JopOpeningUserService {
     public ResponseEntity reApply(int applcId) {
         try{
 
-            JobOpening_User existingApplication = jobOpening_userDao.findByJob_userId(applcId);
+            JobOpening_User existingApplication = jobOpening_userDao.findByJobUserId(applcId);
             User u = userDao.findByuserId(existingApplication.getUserId());
 
             int pending = u.getPending_applications();
