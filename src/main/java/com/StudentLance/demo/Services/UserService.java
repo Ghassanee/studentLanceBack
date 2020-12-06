@@ -254,7 +254,7 @@ public class UserService {
 
             for(int i = 0; i < interview_jobs.size(); i++){
                 ModelMap m = new ModelMap();
-                m.addAttribute("applicationId", interview_jobs.get(i).getJob_userId());
+                m.addAttribute("applicationId", interview_jobs.get(i).getJobUserId());
                 m.addAttribute("job", jobOpeningDao.findByJobId(interview_jobs.get(i).getJobId()));
                 m.addAttribute("userId", interview_jobs.get(i).getUserId());
                 m.addAttribute("status", interview_jobs.get(i).getStatus());

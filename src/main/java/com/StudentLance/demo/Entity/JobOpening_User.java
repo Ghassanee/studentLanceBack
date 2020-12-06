@@ -33,7 +33,7 @@ public class JobOpening_User {
         return jobUserId;
     }
 
-    public void setJob_userId(int jobUserId) {
+    public void setJobUserId(int jobUserId) {
         this.jobUserId = jobUserId;
     }
 
