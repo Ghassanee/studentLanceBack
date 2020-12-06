@@ -12,10 +12,10 @@ import java.util.List;
 public interface JobOpeningDAO extends JpaRepository<JobOpening,Long> {
     public JobOpening findByJobId(int jobId);
 
-    @Query(nativeQuery = true,   "select * from JobOpening j where j.companyId = :companyId ")
+    @Query("select * from JobOpening j where j.companyId = :companyId ")
     public List<JobOpening> findJobOpeningsInCompany(@Param("companyId") String companyid);
 
-    @Query(nativeQuery = true,   "select * from JobOpening j where j.jobId = :jobId")
+    @Query("select * from JobOpening j where j.jobId = :jobId")
     public JobOpening findJobOpeningByJobId(@Param("jobId") int jobId);
 
     @Query("select * from JobOpening j where j.status IN :statuslist AND j.companyId = :companyid")
