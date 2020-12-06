@@ -2,7 +2,7 @@ package com.StudentLance.demo.Entity;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "user_entity")
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
