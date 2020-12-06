@@ -12,13 +12,13 @@ import java.util.List;
 public interface JobOpeningDAO extends JpaRepository<JobOpening,Long> {
     public JobOpening findByJobId(int jobId);
 
-    @Query("select * from JobOpening j where j.companyId = :companyId ")
+    @Query("select j from JobOpening j where j.companyId = :companyId ")
     public List<JobOpening> findJobOpeningsInCompany(@Param("companyId") String companyid);
 
-    @Query("select * from JobOpening j where j.jobId = :jobId")
+    @Query("select j from JobOpening j where j.jobId = :jobId")
     public JobOpening findJobOpeningByJobId(@Param("jobId") int jobId);
 
-    @Query("select * from JobOpening j where j.status IN :statuslist AND j.companyId = :companyid")
+    @Query("select j from JobOpening j where j.status IN :statuslist AND j.companyId = :companyid")
     public  List<JobOpening> findJobOpeningsInCompanyByStatus(@Param("companyid") String companyid, @Param("statuslist") List<String> statuslist);
 
     @Query( "select j.jobId from JobOpening j where j.companyname IN :companies AND j.status = 'Open'")
@@ -33,10 +33,10 @@ public interface JobOpeningDAO extends JpaRepository<JobOpening,Long> {
     public  List<Integer> findJobOpeningsInCompanyBySalary(@Param("salarystart") int salarystart, @Param("salaryend") int salaryend);
 
 
-    @Query( "select * from JobOpening j where j.jobId IN :jobId")
+    @Query( "select j from JobOpening j where j.jobId IN :jobId")
     public  List<JobOpening> findJobOpeningsInCompanyByFilter(@Param("jobId") List<Integer> jobId);
 
-    @Query("select * from JobOpening j where j.status = 'Open'")
+    @Query("select j from JobOpening j where j.status = 'Open'")
     List<JobOpening> getAllJobs();
 
     @Query( "select distinct j.location from JobOpening j")

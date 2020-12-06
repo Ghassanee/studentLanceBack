@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface InterviewDAO extends JpaRepository<Interview,Long> {
 
-    @Query("select * from Interview i where i.status IN :statuslist")
+    @Query("select i from Interview i where i.status IN :statuslist")
     public List<Interview> getInterviewByStatus(@Param("statuslist") List<String> statuslist);
 
 }
