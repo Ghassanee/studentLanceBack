@@ -26,7 +26,14 @@ public class JobOpening_User {
     public JobOpening_User() {
     }
 
-    public JobOpening_User(int userId, int jobId, int companyId, Object o, boolean b, boolean b1) {
+    
+    public JobOpening_User( int userId, int jobId, int companyId, String status, boolean interested, boolean terminal) {
+        this.userId = userId;
+        this.jobId = jobId;
+        this.companyId = companyId;
+        this.status = status;
+        this.interested = interested;
+        this.terminal = terminal;
     }
 
     public int getJobUserId() {

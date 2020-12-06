@@ -21,13 +21,25 @@ public class JobOpening {
 
         public JobOpening() {
         }
-
-    public JobOpening(Integer valueOf, String companyname, String title, String description, String responsibilities, String location, Integer valueOf1) {
+public JobOpening(int companyId,String companyname, String title, String description, String responsibilities, String location, int salary,  String status) {
+        this.companyId = companyId;
+        this.title = title;
+        this.description = description;
+        this.responsibilities = responsibilities;
+        this.location = location;
+        this.salary = salary;
+        this.companyname = companyname;
+        this.status = status;
     }
-
-    public JobOpening(int companyId, String companyname, String title, String description, String responsibilities, String location, int salary, String status) {
+    public JobOpening(Integer companyId,String companyname, String title, String description, String responsibilities, String location, int salary) {
+        this.companyId = companyId;
+        this.title = title;
+        this.description = description;
+        this.responsibilities = responsibilities;
+        this.location = location;
+        this.salary = salary;
+        this.companyname = companyname;
     }
-
     public int getJobId() {
             return jobId;
         }

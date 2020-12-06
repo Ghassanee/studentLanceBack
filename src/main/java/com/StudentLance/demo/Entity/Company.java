@@ -35,8 +35,17 @@ public class Company {
     public Company() {
     }
 
-    public Company(String companyname, String website, String location, String logoImageUrl, String description, String password, String companyemail) {
+    
+    public Company(String companyname,  String website, String location, String logo_image_URL, String description, String companyemail, String passeword) {
+        this.companyname = companyname;
+        this.website = website;
+        this.location = location;
+        this.logo_image_URL = logo_image_URL;
+        this.description = description;
+        this.companyemail = companyemail;
+        this.passeword = passeword;
     }
+
 
     public String getCompanyname() {
         return companyname;

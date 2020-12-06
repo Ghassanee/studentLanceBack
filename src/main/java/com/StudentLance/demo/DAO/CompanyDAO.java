@@ -18,6 +18,7 @@ public interface CompanyDAO extends JpaRepository<Company,Long> {
     @Query("select distinct c.companyname from Company c")
     List<String> getAllCompanies();
 
+    
 
 
 }

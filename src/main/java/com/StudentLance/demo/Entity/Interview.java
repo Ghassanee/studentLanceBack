@@ -18,7 +18,13 @@ public class Interview {
     public Interview() {
     }
 
-    public Interview(int userId, int jobId, int applicationid, String location, String startTime, String status) {
+    public Interview(int userId, int jobId, int applicationId, String status, String location, String time) {
+        this.userId = userId;
+        this.jobId = jobId;
+        this.applicationId = applicationId;
+        this.status = status;
+        this.location = location;
+        this.time = time;
     }
 
     public int getInterviewId() {
