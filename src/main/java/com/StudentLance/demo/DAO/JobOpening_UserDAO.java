@@ -10,8 +10,7 @@ import java.util.List;
 
 @Repository
 public interface JobOpening_UserDAO extends JpaRepository<JobOpening_User,Long> {
-    @Query("select j from JobOpening_User j  where j.jobUserId = :job_userId")
-    JobOpening_User findByJob_userId(@Param("job_userId") int job_userId);
+    JobOpening_User findByJobUserId(int jobUserId);
 
     @Query( "select j from  JobOpening_User j  where j.userId = :userId AND j.jobId = :jobId")
     JobOpening_User checkEntry(@Param("userId") int userId, @Param("jobId") int jobId);

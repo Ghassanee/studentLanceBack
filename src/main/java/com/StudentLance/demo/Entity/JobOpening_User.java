@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class JobOpening_User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int job_userId;
+    private int jobUserId;
     private int userId;
     private int jobId;
     private int companyId;
@@ -29,12 +29,12 @@ public class JobOpening_User {
     public JobOpening_User(int userId, int jobId, int companyId, Object o, boolean b, boolean b1) {
     }
 
-    public int getJob_userId() {
-        return job_userId;
+    public int getJobUserId() {
+        return jobUserId;
     }
 
-    public void setJob_userId(int job_userId) {
-        this.job_userId = job_userId;
+    public void setJob_userId(int jobUserId) {
+        this.jobUserId = jobUserId;
     }
 
     public int getUserId() {
