@@ -14,7 +14,7 @@ public interface CompanyDAO extends JpaRepository<Company,Long> {
 
     public Company findByCompanyemail(String companyemail);
 
-    @Query(value = "select distinct companyname from studentlance.company", nativeQuery = true)
+    @Query(  "select distinct c.companyname from Company c")
     List<String> getAllCompanies();
 
 

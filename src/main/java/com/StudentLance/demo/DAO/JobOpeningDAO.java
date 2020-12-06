@@ -12,34 +12,34 @@ import java.util.List;
 public interface JobOpeningDAO extends JpaRepository<JobOpening,Long> {
     public JobOpening findByJobId(int jobId);
 
-    @Query(nativeQuery = true, value = "select * from studentlance.job_opening where company_id = ?")
-    public List<JobOpening> findJobOpeningsInCompany(String companyid);
+    @Query(nativeQuery = true,   "select * from JobOpening j where j.companyId = :companyId ")
+    public List<JobOpening> findJobOpeningsInCompany(@Param("companyId") String companyid);
 
-    @Query(nativeQuery = true, value = "select * from studentlance.job_opening where job_Id = ?")
-    public JobOpening findJobOpeningByJobId(int jobId);
+    @Query(nativeQuery = true,   "select * from JobOpening j where j.jobId = :jobId")
+    public JobOpening findJobOpeningByJobId(@Param("jobId") int jobId);
 
-    @Query(nativeQuery = true, value = "select * from studentlance.job_opening where status IN :statuslist AND company_id = :companyid")
+    @Query("select * from JobOpening j where j.status IN :statuslist AND j.companyId = :companyid")
     public  List<JobOpening> findJobOpeningsInCompanyByStatus(@Param("companyid") String companyid, @Param("statuslist") List<String> statuslist);
 
-    @Query(nativeQuery = true, value = "select job_Id from studentlance.job_opening where companyname IN :companies AND status = 'Open'")
+    @Query( "select j.jobId from JobOpening j where j.companyname IN :companies AND j.status = 'Open'")
     public  List<Integer> findJobOpeningsInCompanyByName(@Param("companies") List<String> companies);
 
-    @Query(nativeQuery = true, value = "select job_Id from studentlance.job_opening where location IN :locations AND status = 'Open'")
+    @Query( "select j.jobId from JobOpening j where j.location IN :locations AND j.status = 'Open'")
     public  List<Integer> findJobOpeningsInCompanyByLocation(@Param("locations") List<String> locations);
 
 
 
-    @Query(nativeQuery = true, value = "select job_Id from studentlance.job_opening where salary > :salarystart AND salary < :salaryend AND status = 'Open'")
+    @Query("select j.jobId from JobOpening j where j.salary > :salarystart AND j.salary < :salaryend AND j.status = 'Open'")
     public  List<Integer> findJobOpeningsInCompanyBySalary(@Param("salarystart") int salarystart, @Param("salaryend") int salaryend);
 
 
-    @Query(nativeQuery = true, value = "select * from studentlance.job_opening where job_Id IN :jobId")
+    @Query( "select * from JobOpening j where j.jobId IN :jobId")
     public  List<JobOpening> findJobOpeningsInCompanyByFilter(@Param("jobId") List<Integer> jobId);
 
-    @Query(value = "select * from studentlance.job_opening where status = 'Open'", nativeQuery = true)
+    @Query("select * from JobOpening j where j.status = 'Open'")
     List<JobOpening> getAllJobs();
 
-    @Query(value = "select distinct location from studentlance.job_opening", nativeQuery = true)
+    @Query( "select distinct j.location from JobOpening j")
     List<String> getAllLocations();
 
 

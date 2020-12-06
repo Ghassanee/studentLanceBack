@@ -64,7 +64,7 @@ public class JopOpening_UserRest {
     }
 
 
-    @PostMapping(value ="/userJob/applyResume")
+    @PostMapping( "/userJob/applyResume")
     public void user_applyResume() {
 
     }

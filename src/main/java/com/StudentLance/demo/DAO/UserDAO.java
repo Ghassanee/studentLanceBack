@@ -12,9 +12,11 @@ public interface UserDAO extends JpaRepository<User,Long> {
 
     public User findByuserId(int id);
 
-    public User findUserByPhone(String phone);
+    @Query("select * from User u  where u.phone = :phone")
+    public User findUserByPhone(@Param("phone") String phone);
 
-    public User findUserByEmail(String email);
+    @Query("select * from User u where u.email = :email")
+    public User findUserByEmail(@Param("email") String email);
 
 }
 
