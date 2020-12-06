@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface CompanyDAO extends JpaRepository<Company,String> {
 
-    public Company findByCompanyId(String  companyId);
+    public Company findByCompanyId(int  companyId);
     public List<Company> findAll();
 
     public Company findByCompanyemail(String companyemail);
