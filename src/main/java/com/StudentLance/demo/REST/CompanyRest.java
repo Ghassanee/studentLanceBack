@@ -36,11 +36,16 @@ public class CompanyRest {
 
     @Autowired
     private UserService userService;
+    
+    @GetMapping("/company/")
+    public List<Interview> getAll(){
+        return companyService.getAll();
+    }
 
 
     @GetMapping("/company/{companyId}")
     public ResponseEntity getCompany(HttpServletResponse response,
-                                     @PathVariable String  companyId) {
+                                     @PathVariable int companyId) {
 
         Company company = companyService.getCompany(companyId);
 

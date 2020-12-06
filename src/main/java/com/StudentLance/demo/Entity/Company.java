@@ -11,7 +11,7 @@ public class Company {
     private String companyname;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private String  companyId;
+    private int companyId;
     private String website;
     private String location;
     private String logo_image_URL ;
@@ -55,11 +55,11 @@ public class Company {
         this.companyname = companyname;
     }
 
-    public String  getCompanyId() {
+    public int getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(String  companyId) {
+    public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
 

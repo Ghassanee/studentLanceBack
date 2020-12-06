@@ -33,7 +33,7 @@ public class CompanyService {
         this.companyDao = companyDao;
     }
 
-    public Company getCompany(String  companyId){
+    public Company getCompany(int companyId){
 
 
         return companyDao.findByCompanyId(companyId);
@@ -151,7 +151,9 @@ public class CompanyService {
             return null;
         }
     }
-
+    public List<Interview> getAll(){
+        return interviewDao.findAll();
+    }
 
 }
 
