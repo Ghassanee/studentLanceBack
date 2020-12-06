@@ -11,7 +11,7 @@ public class Company {
     private String companyname;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer companyId;
+    private Long companyId;
     private String website;
     private String location;
     private String logo_image_URL ;
