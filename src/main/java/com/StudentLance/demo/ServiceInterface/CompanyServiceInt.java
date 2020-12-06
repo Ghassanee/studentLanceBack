@@ -7,7 +7,7 @@ import com.StudentLance.demo.Entity.JobOpening;
 import java.util.List;
 
 public interface CompanyServiceInt {
-    public Company getCompany(int companyId);
+    public Company getCompany(String  companyId);
     public Company getCompany(String email);
     public Company createCompany(String companyname, String website, String location, String logoImageUrl, String description, String password, String companyemail);
     public Company updateCompany(String companyName, String website, String location, String logoImageUrl, String description, String password, int companyId);

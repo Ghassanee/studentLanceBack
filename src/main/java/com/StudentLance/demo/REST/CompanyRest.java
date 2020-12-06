@@ -40,7 +40,7 @@ public class CompanyRest {
 
     @GetMapping("/company/{companyId}")
     public ResponseEntity getCompany(HttpServletResponse response,
-                                     @PathVariable int companyId) {
+                                     @PathVariable String  companyId) {
 
         Company company = companyService.getCompany(companyId);
 

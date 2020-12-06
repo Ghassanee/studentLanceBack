@@ -33,7 +33,7 @@ public class CompanyService {
         this.companyDao = companyDao;
     }
 
-    public Company getCompany(int companyId){
+    public Company getCompany(String  companyId){
 
 
         return companyDao.findByCompanyId(companyId);
