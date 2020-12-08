@@ -1,145 +1,79 @@
 package com.StudentLance.demo.REST;
 
-import com.StudentLance.demo.Services.CompanyService;
-import com.StudentLance.demo.Services.JobOpeningService;
+import com.StudentLance.demo.Entity.JobOpening_User;
 import com.StudentLance.demo.Services.JopOpeningUserService;
-import com.StudentLance.demo.Services.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/StudentLance/JobOpeninng_User")
 
 public class JopOpening_UserRest {
-    @Autowired
-    private CompanyService companyService;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private JobOpeningService jobOpeningService;
 
     @Autowired
     private JopOpeningUserService jobOpeningUserService ;
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
-
-    @PostMapping("/userJob/interest")
-    public ResponseEntity markInterested(@RequestParam Map<String,String> params) {
-
-        int userId = Integer.valueOf(params.get("userId"));
-        int jobId = Integer.valueOf(params.get("jobId"));
-        boolean markedInterest =  jobOpeningUserService.markInterested(userId, jobId);
-
-        if(markedInterest){
-            return new ResponseEntity(HttpStatus.OK);
-        }else{
-            return null;
-        }
-
+    @GetMapping("/{ref}")
+    public ResponseEntity<JobOpening_User> findByJobUserRef(@PathVariable("ref") String ref) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findByJobUserRef(ref));
     }
 
-    @PostMapping("/userJob/notInterest")
-    public ResponseEntity markNotInterested(@RequestParam Map<String,String> params) {
-
-        int userId = Integer.valueOf(params.get("userId"));
-        int jobId = Integer.valueOf(params.get("jobId"));
-
-        boolean markedNotInterest =  jobOpeningUserService.markNotInterested(userId, jobId);
-
-        if(markedNotInterest){
-            return new ResponseEntity(HttpStatus.OK);
-        }else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-
+    @GetMapping("/job&user/{jobOpening}/{user}")
+    public ResponseEntity<JobOpening_User> findByJobOpeningAndUser(@PathVariable("jobOpening") String jobOpening,@PathVariable("user") String user) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findByJobOpeningAndUser(jobOpening, user));
     }
 
-
-    @PostMapping( "/userJob/applyResume")
-    public void user_applyResume() {
-
+    @GetMapping("/user/{user}")
+    public ResponseEntity<List<JobOpening_User>> findAllByUser(@PathVariable("user") String user) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findAllByUser(user));
     }
 
-    @GetMapping("/company/getApplication")
-    public ResponseEntity getCompanyApplications(@RequestParam(value="jobid") String jobid) {
-
-        try{
-
-            return jobOpeningUserService.getCompanyApplications(Integer.valueOf(jobid));
-
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-
+    @GetMapping("/jobOpening/{jobOpening}")
+    public ResponseEntity<List<JobOpening_User>> findAllByJobOpening(@PathVariable("jobOpening") String jobOpening) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findAllByJobOpening(jobOpening));
     }
 
-    @GetMapping("/users/getInterestedJobs/{id}")
-    public ResponseEntity getUserAllInterestedJobs(@PathVariable(value="id") String userid) {
-
-        return jobOpeningUserService.getUserAllInterestedJobs(Integer.valueOf(userid));
-
-
+    @GetMapping("/terminal")
+    public ResponseEntity<List<JobOpening_User>> findTerminalTrue() {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findTerminalTrue());
     }
 
-    @GetMapping("/userJob/interestedJobs/{id}")
-    public ResponseEntity getUser_interestedJobs(@PathVariable(value="id") String id) {
-
-        try{
-            Object obj = jobOpeningUserService.getUserJobStatus(Integer.valueOf(id));
-
-            ModelMap m = new ModelMap();
-            m.addAttribute("jobStatus", obj);
-            m.addAttribute("interests", jobOpeningUserService.getUserInterestJobs(Integer.valueOf(id)));
-
-            return new ResponseEntity(m, HttpStatus.OK);
-
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/status/{status}")
+    public ResponseEntity<List<JobOpening_User>> findByStatus(@PathVariable("status") String status) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findByStatus(status));
     }
 
-    @PostMapping("/userJob/apply")
-    public ResponseEntity apply_Job(@RequestParam Map<String,String> params) {
-
-        String resume;
-
-        if(params.get("resume") != null){
-            resume = params.get("resume");
-
-        }else{
-            resume = null;
-        }
-
-        return jobOpeningUserService.apply_Job(Integer.valueOf(params.get("userid")), Integer.valueOf(params.get("jobid")), resume);
+    @GetMapping("/interested")
+    public ResponseEntity<List<JobOpening_User>> findByInterestedTrue() {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findByInterestedTrue());
     }
 
-    @PostMapping("/userJob/changeStatus")
-    public ResponseEntity changeStatus(@RequestParam Map<String,String> params) {
+    @GetMapping("/")
+    public ResponseEntity<List<JobOpening_User>> findAll() {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.findAll());
+    }
 
-        int applicationId = Integer.valueOf(params.get("applicationId"));
-        String status = params.get("status");
-
-        // return jobOpening_userService.changeStatus(applicationId, status);
-        return jobOpeningUserService.changeStatus(applicationId, status);
+    @PutMapping("/")
+    public ResponseEntity<JobOpening_User> applyToJob(@RequestBody JobOpening_User jobOpening_user) {
+        return ResponseEntity.status(OK)
+                .body(jobOpeningUserService.applyToJob(jobOpening_user));
     }
 
 
-    @PostMapping("/userJob/reapply")
-    public ResponseEntity reApply(@RequestParam Map<String,String> params) {
 
-        int applicationId = Integer.valueOf(params.get("applicationId"));
-
-        return jobOpeningUserService.reApply(applicationId);
-    }
 
 
 }

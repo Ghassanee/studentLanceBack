@@ -9,17 +9,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 @Repository
-public interface CompanyDAO extends JpaRepository<Company,Integer> {
+public interface CompanyDAO extends JpaRepository<Company,Long> {
 
-    public Company findByCompanyId(int  companyId);
-    public List<Company> findAll();
+    Company findByCompanyRef(String companyRef);
 
-    public Company findByCompanyemail(String companyemail);
+    List<Company> findAll();
 
-    @Query("select distinct c.companyname from Company c")
-    List<String> getAllCompanies();
-
-    
-
+    Company findByCompanyEmail(String email);
 
 }

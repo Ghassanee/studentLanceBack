@@ -1,6 +1,8 @@
 package com.StudentLance.demo.DAO;
 
+import com.StudentLance.demo.Entity.JobOpening;
 import com.StudentLance.demo.Entity.JobOpening_User;
+import com.StudentLance.demo.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,34 +12,22 @@ import java.util.List;
 
 @Repository
 public interface JobOpening_UserDAO extends JpaRepository<JobOpening_User,Long> {
-    JobOpening_User findByJobUserId(int jobUserId);
 
-    @Query( "select j from  JobOpening_User j  where j.userId = :userId AND j.jobId = :jobId")
-    JobOpening_User checkEntry(@Param("userId") int userId, @Param("jobId") int jobId);
+    JobOpening_User findByJobOpeningAndUser(JobOpening jobOpening, User user);
 
-    @Query( "select distinct j.jobId from JobOpening_User j where j.interested = 1 and j.userId = :userId")
-    List<Integer> getUserInterestJobs(@Param("userId") int userId);
+    JobOpening_User findByJobUserRef(String jobUserRef);
 
-    @Query( "select j from JobOpening_User j where j.userId = :userId")
-    List<JobOpening_User> getUserJobStatus(@Param("userId") int userId);
+    List<JobOpening_User> findAllByUser(User user);
 
-    @Query( "select j from JobOpening_User j where j.jobId = :jobId")
-    List<JobOpening_User> getCompanyApplication(@Param("jobId") int jobId);
+    List<JobOpening_User> findAll();
 
-    @Query( "select j from JobOpening_User j where j.userId = :userId")
-    List<JobOpening_User> getInterestedJobs(@Param("userId") int userid);
+    List<JobOpening_User> findAllByJobOpening(JobOpening jobOpening);
 
-    @Query( "select j from JobOpening_User j where j.jobId = :jobId AND j.terminal = 0")
-    List<JobOpening_User> getActiveCompanyApplications(@Param("jobId") int jobId);
+    List<JobOpening_User> findByTerminalTrue();
 
-    @Query( "select j from JobOpening_User j where j.userId = :userId")
-    List<JobOpening_User> getUserInterviews(@Param("userId") int userid);
+    List<JobOpening_User> findByStatus(String status);
 
-    @Query( "select j from JobOpening_User j where j.status = 'OfferAccepted' and j.jobId = :jobId")
-    List<JobOpening_User> getOfferJobs(@Param("jobId") int jobid);
-
-    @Query( "select j from JobOpening_User j where (j.status = 'Applied' or j.status like '%Interview%' or j.status = 'offered') and j.jobId = :jobId")
-    List<JobOpening_User> getNonTerminalApplications(@Param("jobId") int jobid);
+    List<JobOpening_User> findByInterestedTrue();
 
 
 }

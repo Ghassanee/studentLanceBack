@@ -1,24 +1,28 @@
 package com.StudentLance.demo.ServiceInterface;
 
-import com.StudentLance.demo.DAO.UserDAO;
+import com.StudentLance.demo.Entity.Interview;
 import com.StudentLance.demo.Entity.User;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 public interface UserServiceInt {
 
-    public User getUser(String email);
+    User findByUserRef(String userRef);
 
-    public User getUserByID(int id);
+    User findByPhone(String phone);
 
-    public ResponseEntity createUser(String firstname, String lastname, String phone, String email, String password,
-                                     String address, String education, String skills, Float experience,
-                                     String introduction, String status, String image);
+    User findByEmail( String email);
 
-    public ResponseEntity<Object> updateUser(int id, String parameter, String value);
+    User createUser(User user, boolean create);
 
-    public ResponseEntity addImage(int userid, String image);
+    User updateUser(User user);
 
-    public ResponseEntity getUserInterviews(int userid);
+    User login(String email, String password);
+
+    //ResponseEntity addImage(int userid, String image);
+
+    List<Interview> getUserInterviews(String userRef);
 
 
 }

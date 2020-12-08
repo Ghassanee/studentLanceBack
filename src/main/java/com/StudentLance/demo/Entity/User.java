@@ -1,37 +1,73 @@
 package com.StudentLance.demo.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "user_entity")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int userId;
+    private long userId;
+    private String userRef;
     private String firstname;
     private String lastname;
     private String phone;
     private String email;
     private String password;
-    private String image;
     private String address;
     private String introduction;
-    private Float experience;
+    private float experience;
     private String education;
     private String status;
     private String skills;
-    private int pending_applications;
-    @Lob
-    private byte[] photo;
+    private ImageModel photo;
+    @OneToMany
+    private List<JobOpening_User> jobOpeningUserList;
+
+    public User(String userRef, String firstname, String lastname, String phone, String email, String password, String address, String introduction, float experience, String education, String status, String skills, ImageModel photo) {
+        this.userRef = userRef;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.address = address;
+        this.introduction = introduction;
+        this.experience = experience;
+        this.education = education;
+        this.status = status;
+        this.skills = skills;
+        this.photo = photo;
+        this.jobOpeningUserList = new ArrayList<>();
+    }
 
     public User() {
     }
 
-    public int getUserId() {
+    public List<JobOpening_User> getJobOpeningUserList() {
+        return jobOpeningUserList;
+    }
+
+    public void setJobOpeningUserList(List<JobOpening_User> jobOpeningUserList) {
+        this.jobOpeningUserList = jobOpeningUserList;
+    }
+
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
+    }
+
+    public String getUserRef() {
+        return userRef;
+    }
+
+    public void setUserRef(String userRef) {
+        this.userRef = userRef;
     }
 
     public String getFirstname() {
@@ -74,14 +110,6 @@ public class User {
         this.password = password;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
     public String getAddress() {
         return address;
     }
@@ -98,11 +126,11 @@ public class User {
         this.introduction = introduction;
     }
 
-    public Float getExperience() {
+    public float getExperience() {
         return experience;
     }
 
-    public void setExperience(Float experience) {
+    public void setExperience(float experience) {
         this.experience = experience;
     }
 
@@ -130,38 +158,11 @@ public class User {
         this.skills = skills;
     }
 
-    public int getPending_applications() {
-        return pending_applications;
-    }
-
-    public void setPending_applications(int pending_applications) {
-        this.pending_applications = pending_applications;
-    }
-
-    public byte[] getPhoto() {
+    public ImageModel getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(ImageModel photo) {
         this.photo = photo;
-    }
-    public User(String firstname, String lastname,String phone, String email,String password, String address,
-                String education,String skills, Float experience, String introduction, String status,
-                String image) {
-        super();
-
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.experience = experience;
-        this.education = education;
-        this.introduction = introduction;
-        this.status = status;
-        this.skills = skills;
-        this.image = image;
-
     }
 }

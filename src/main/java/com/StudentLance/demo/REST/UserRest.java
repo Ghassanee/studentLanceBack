@@ -1,6 +1,8 @@
 package com.StudentLance.demo.REST;
 
+import com.StudentLance.demo.Entity.Interview;
 import com.StudentLance.demo.Entity.User;
+import com.StudentLance.demo.Services.ImageUploadService;
 import com.StudentLance.demo.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -9,148 +11,69 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/StudentLance/User")
 public class UserRest {
+
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users")
-    public ResponseEntity getByEmail(@RequestParam(value="email", required = true) String email,
-                                     @RequestParam(value="password", required = true) String password) {
+    @Autowired
+    private ImageUploadService imageUploadService;
 
-
-        User user = userService.getUser(email);
-
-        if(user != null){
-            if(user.getPassword().equals(password)){
-                return new ResponseEntity<>(user, new HttpHeaders(), HttpStatus.OK);
-            }else{
-                ModelMap m = new ModelMap();
-                m.addAttribute("code", 400);
-                return new ResponseEntity<>(m, new HttpHeaders(), HttpStatus.BAD_REQUEST);
-            }
-        }else{
-            ModelMap m = new ModelMap();
-            m.addAttribute("code", 404);
-            return new ResponseEntity<>(m, new HttpHeaders(), HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/users/{ref}")
+    public ResponseEntity<User> findByUserRef(@PathVariable("ref") String userRef) {
+        return ResponseEntity.status(OK)
+                .body(userService.findByUserRef(userRef));
     }
 
-
-    @RequestMapping(value= "/users/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Object> getById(@PathVariable(value="id") String id) {
-
-
-        User user;
-        ModelMap model = new ModelMap();
-
-        user = userService.getUserByID(Integer.valueOf(id));
-
-        return ResponseEntity.ok(user);
-
+    @GetMapping("/users/phone/{phone}")
+    public ResponseEntity<User> findByPhone(@PathVariable("phone") String phone) {
+        return ResponseEntity.status(OK)
+                .body(userService.findByPhone(phone));
     }
 
-
-    @PostMapping("/users/check")
-    public ResponseEntity checkUser(@RequestParam(value="email", required = true) String email,
-                                    @RequestParam(value="phone", required = true) String phone) {
-
-        return userService.checkUser(email, phone);
+    @GetMapping("/users/email/{email}")
+    public ResponseEntity<User> findByEmail(@PathVariable("email") String email) {
+        return ResponseEntity.status(OK)
+                .body(userService.findByEmail(email));
+    }
+    @GetMapping("/users/login/{email}/{password}")
+    public ResponseEntity<User> login(@PathVariable("email") String email, @PathVariable("password") String password) {
+        return ResponseEntity.status(OK)
+                .body(userService.login(email, password));
     }
 
-    @PostMapping("/users")
-    public ResponseEntity create(@RequestParam(value="firstname", required = true) String firstname,
-                                 @RequestParam(value="lastname", required = true) String lastname,
-                                 @RequestParam(value="email", required = true) String email,
-                                 @RequestParam(value="password", required = true) String password,
-                                 @RequestParam(value="image", required = false) String image,
-                                 @RequestParam(value="introduction", required = false) String introduction,
-                                 @RequestParam(value="experience", required = true) Float experience,
-                                 @RequestParam(value="status", required = true) String status,
-                                 @RequestParam(value="education", required = true) String education,
-                                 @RequestParam(value="skills", required = true) String skills,
-                                 @RequestParam(value="address", required = true) String address,
-                                 @RequestParam(value="phone", required = true) String phone
-
-
-    ) {
-
-        return userService.createUser(firstname, lastname, phone, email, password, address, education, skills, experience, introduction, status, image);
+    @PostMapping("/signUp")
+    public ResponseEntity<User> create(@RequestBody User user, @RequestParam("imageFile") MultipartFile file ) throws IOException {
+        if (file != null) {
+            user.setPhoto(imageUploadService.uplaodImage(file));
+        }
+        return ResponseEntity.status(OK)
+                .body(userService.createUser(user, true));
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<Object> update(@PathVariable(value="id") String id,
-                                         @RequestParam Map<String,String> params
-
-
-    ) throws IOException {
-
-        ResponseEntity<Object> rs = null;
-
-        if(params.get("firstname") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "firstname", params.get("firstname"));
+    @PutMapping("/user/update")
+    public ResponseEntity<User> update(@RequestBody User user, @RequestParam("imageFile") MultipartFile file) throws IOException {
+        if (file != null) {
+            user.setPhoto(imageUploadService.uplaodImage(file));
         }
-
-        if(params.get("lastname") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "lastname", params.get("lastname"));
-        }
-
-        if(params.get("address") !=null){
-
-            rs = userService.updateUser(Integer.valueOf(id), "address", params.get("address"));
-        }
-
-        if(params.get("education") !=null){
-
-            rs = userService.updateUser(Integer.valueOf(id), "education", params.get("education"));
-        }
-
-        if(params.get("introduction") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "introduction", params.get("introduction"));
-        }
-
-        if(params.get("phone") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "phone", params.get("phone"));
-        }
-
-        if(params.get("skills") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "skills", params.get("skills"));
-        }
-
-        if(params.get("status") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "status", params.get("status"));
-        }
-
-        if(params.get("password") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "password", params.get("password"));
-        }
-
-        if(params.get("experience") !=null){
-            rs = userService.updateUser(Integer.valueOf(id), "experience", params.get("experience"));
-        }
-
-        return rs;
-    }
-
-
-    @PostMapping("/user/addImage")
-    public ResponseEntity addImage(@RequestParam(value="image") String image,
-                                   @RequestParam String userid)
-    {
-
-        return userService.addImage(Integer.valueOf(userid), image);
-
+        return ResponseEntity.status(OK)
+                .body(userService.updateUser(user));
     }
 
     @GetMapping("/user/getInterviews/{id}")
-    public ResponseEntity getUserInterviews(@PathVariable(value="id") String userid) {
-        return userService.getUserInterviews(Integer.valueOf(userid));
-
+    public ResponseEntity<List<Interview>> getUserInterviews(@PathVariable(value="id") String userId) {
+        return ResponseEntity.status(OK)
+                .body(userService.getUserInterviews(userId));
     }
 
 }

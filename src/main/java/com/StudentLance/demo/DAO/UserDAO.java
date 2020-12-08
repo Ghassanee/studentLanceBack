@@ -11,11 +11,11 @@ import org.springframework.data.repository.query.Param;
 @Repository
 public interface UserDAO extends JpaRepository<User,Long> {
 
-    public User findByuserId(int id);
+    User findByUserRef(String userRes);
 
-    public User findUserByPhone(String phone);
+    User findByPhone(String phone);
 
-    public User findUserByEmail( String email);
+    User findByEmail( String email);
 
 }
 

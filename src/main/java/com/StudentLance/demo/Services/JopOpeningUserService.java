@@ -1,475 +1,111 @@
 package com.StudentLance.demo.Services;
 
-import com.StudentLance.demo.DAO.CompanyDAO;
 import com.StudentLance.demo.DAO.JobOpeningDAO;
 import com.StudentLance.demo.DAO.JobOpening_UserDAO;
 import com.StudentLance.demo.DAO.UserDAO;
 import com.StudentLance.demo.Entity.JobOpening;
 import com.StudentLance.demo.Entity.JobOpening_User;
 import com.StudentLance.demo.Entity.User;
+import com.StudentLance.demo.ServiceInterface.JobOpeningUserServiceInt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-public class JopOpeningUserService {
+public class JopOpeningUserService implements JobOpeningUserServiceInt {
     @Autowired
-    private JobOpeningDAO jobOpeningDao;
-
-    @Autowired
-    private CompanyDAO companyDao;
+    private JobOpeningDAO jobOpeningDAO;
 
     @Autowired
-    private UserDAO userDao;
+    private UserDAO userDAO;
 
     @Autowired
-    private JobOpening_UserDAO jobOpening_userDao;
+    private JobOpening_UserDAO jobOpeningUserDAO;
 
-    public boolean markNotInterested(int userId, int jobId) {
 
+    @Override
+    public JobOpening_User findByJobOpeningAndUser(String jobOpening, String user) {
+        JobOpening foundedJobOpening = jobOpeningDAO.findByJobOpeningRef(jobOpening);
+        User foundedUser = userDAO.findByUserRef(user);
         try {
-            JobOpening_User jobOpening_user = jobOpening_userDao.checkEntry(userId, jobId);
+            if (foundedUser == null) throw new Exception("User not found for this JobUser, User Ref :" + user);
+            if (foundedJobOpening == null) throw new Exception("Job not found for this JobUser, Job Ref :" + jobOpening);
 
-            if(jobOpening_user != null){
-
-                jobOpening_user.setInterested(false);
-                jobOpening_userDao.save(jobOpening_user);
-                return true;
-            }
-            return false;
-        } catch (Exception e)
-        {
-            return false;
+        }catch (Exception e){
+            System.out.println("failed to find JobUser");
         }
+        return jobOpeningUserDAO.findByJobOpeningAndUser(foundedJobOpening, foundedUser);
     }
 
-    public boolean markInterested(int userId, int jobId) {
+    @Override
+    public JobOpening_User findByJobUserRef(String jobUserRef) {
+        return jobOpeningUserDAO.findByJobUserRef(jobUserRef);
+    }
 
+    @Override
+    public List<JobOpening_User> findAllByUser(String user) {
+        User foundedUser = userDAO.findByUserRef(user);
         try {
-            JobOpening_User jobOpening_user = jobOpening_userDao.checkEntry(userId, jobId);
+            if (foundedUser == null) throw new Exception("User not found for this JobUser, User Ref :" + user);
 
-            if(jobOpening_user == null){
-
-                int companyId = jobOpeningDao.findByJobId(jobId).getCompanyId();
-                jobOpening_user = new JobOpening_User(userId, jobId, companyId, null, true, false);
-                jobOpening_userDao.save(jobOpening_user);
-                return true;
-            }else{
-
-                jobOpening_user.setInterested(true);
-                jobOpening_userDao.save(jobOpening_user);
-                return true;
-            }
-        } catch (Exception e)
-        {
-            return false;
+        }catch (Exception e){
+            System.out.println("failed to find JobUser");
         }
+        return jobOpeningUserDAO.findAllByUser(foundedUser);
     }
 
-    public List<Integer> getUserInterestJobs(int userId) {
-
+    @Override
+    public List<JobOpening_User> findAllByJobOpening(String jobOpening) {
+        JobOpening foundedJobOpening = jobOpeningDAO.findByJobOpeningRef(jobOpening);
         try {
-            List<Integer> userInterestJobs = jobOpening_userDao.getUserInterestJobs(userId);
+            if (foundedJobOpening == null) throw new Exception("Job not found for this JobUser, Job Ref :" + jobOpening);
 
-            return userInterestJobs;
-
-        } catch (Exception e)
-        {
-            return null;
+        }catch (Exception e){
+            System.out.println("failed to find JobUser");
         }
+        return jobOpeningUserDAO.findAllByJobOpening(foundedJobOpening);
     }
 
-    public Object getUserJobStatus(int userid){
-        try{
-
-            List<JobOpening_User> jobStatus = jobOpening_userDao.getUserJobStatus(userid);
-
-            Object obj[] = new Object[jobStatus.size()];
-
-            for(int i = 0; i < jobStatus.size(); i++){
-                ModelMap m = new ModelMap();
-                m.addAttribute("applicationId", jobStatus.get(i).getJobUserId());
-                m.addAttribute("jobId", jobStatus.get(i).getJobId());
-                m.addAttribute("userId", jobStatus.get(i).getUserId());
-                m.addAttribute("status", jobStatus.get(i).getStatus());
-                obj[i] = m;
-            }
-
-            return obj;
-
-
-        }catch(Exception e){
-            return null;
-        }
+    @Override
+    public List<JobOpening_User> findTerminalTrue() {
+        return jobOpeningUserDAO.findByTerminalTrue();
     }
 
-    public ResponseEntity apply_Job(int userid, int jobid, String resume) {
+    @Override
+    public List<JobOpening_User> findByStatus(String status) {
+        return jobOpeningUserDAO.findByStatus(status);
+    }
 
+    @Override
+    public List<JobOpening_User> findByInterestedTrue() {
+        return jobOpeningUserDAO.findByInterestedTrue();
+    }
+
+    @Override
+    public List<JobOpening_User> findAll() {
+        return jobOpeningUserDAO.findAll();
+    }
+
+    @Override
+    public JobOpening_User applyToJob(JobOpening_User jobOpening_user) {
         try {
-
-            User u = userDao.findByuserId(userid);
-            int pending = u.getPending_applications();
-            if (pending < 5) {
-                pending = pending + 1;
-                u.setPending_applications(pending);
-                userDao.save(u);
-
-                JobOpening_User jobOpening_user = jobOpening_userDao.checkEntry(userid, jobid);
-
-                if (jobOpening_user == null) {
-
-                    int companyId = jobOpeningDao.findByJobId(jobid).getCompanyId();
-                    jobOpening_user = new JobOpening_User(userid, jobid, companyId, "Applied", false, false);
-
-                    if (resume != null) {
-                        jobOpening_user.setResume(resume);
-                    }
-
-                    jobOpening_userDao.save(jobOpening_user);
-
-                    return new ResponseEntity(jobOpening_user, HttpStatus.OK);
-
-                } else {
-
-                    jobOpening_user.setStatus("Applied");
-
-                    if (resume != null) {
-                        jobOpening_user.setResume(resume);
-                    }
-
-                    jobOpening_userDao.save(jobOpening_user);
-
-                    return new ResponseEntity(jobOpening_user, HttpStatus.OK);
-                }
-            } else {
-                ModelMap m = new ModelMap();
-                m.addAttribute("msg", "too many pending applications");
-                return new ResponseEntity(m, HttpStatus.BAD_REQUEST);
-            }
-        } catch (Exception e) {
-
-            ModelMap m = new ModelMap();
-            m.addAttribute("msg", "Method failure");
-            return new ResponseEntity(m, HttpStatus.BAD_REQUEST);
+            JobOpening_User foundedJobUser = jobOpeningUserDAO.findByJobUserRef(jobOpening_user.getJobUserRef());
+            JobOpening foundedJobOpening = jobOpeningDAO.findByJobOpeningRef(jobOpening_user.getJobOpening().getJobOpeningRef());
+            User foundedUser = userDAO.findByUserRef(jobOpening_user.getUser().getUserRef());
+            if (foundedJobUser != null ) throw new Exception("JobUser Reference already exist!: getJobUserRef:  "+ jobOpening_user.getJobUserRef());
+            else if (foundedJobOpening == null  ) throw new Exception("Job Opening Reference doesn't exist!: JobOpeningRef:  "+ jobOpening_user.getJobOpening().getJobOpeningRef());
+            else if (foundedUser == null ) throw new Exception("User doesn't  exist!: getUserRef:  " + jobOpening_user.getUser().getUserRef());
+        }catch (Exception e){
+            System.out.println("Creating a JobOpening_User failed");
         }
+        return jobOpeningUserDAO.save(jobOpening_user);
     }
 
-    public ResponseEntity getUserAllInterestedJobs(int userid) {
-
-        User user = userDao.findByuserId(userid);
-
-        if(user != null){
-
-            try{
-
-                List<Integer> userInterests = jobOpening_userDao.getUserInterestJobs(userid);
-
-                Object[] interestedJobs = new Object[userInterests.size()];
-
-                for(int i = 0; i < userInterests.size(); i++){
-                    interestedJobs[i] = jobOpeningDao.findByJobId(userInterests.get(i));
-                }
-
-                ModelMap m = new ModelMap();
-                m.addAttribute("jobs", interestedJobs);
-
-                return new ResponseEntity(m, HttpStatus.OK);
-
-            }catch(Exception e){
-                return new ResponseEntity(HttpStatus.BAD_REQUEST);
-            }
-
-
-        }else{
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
-    }
-
-    public ResponseEntity getCompanyApplications(int jobid) {
-        try {
-
-            JobOpening jobOpening = jobOpeningDao.findJobOpeningByJobId(jobid);
-
-            if(jobOpening != null){
-                List<JobOpening_User> job_applications = jobOpening_userDao.getCompanyApplication(jobid);
-                List<ModelMap> applications = new ArrayList<>();
-
-                ModelMap all_applications = new ModelMap();
-
-                for(int i = 0; i < job_applications.size(); i++){
-                    ModelMap m = new ModelMap();
-
-                    m.addAttribute("applicationID", job_applications.get(i).getJobUserId());
-                    m.addAttribute("jobid", job_applications.get(i).getJobId());
-                    m.addAttribute("companyid", job_applications.get(i).getCompanyId());
-                    m.addAttribute("userid", job_applications.get(i).getUserId());
-                    m.addAttribute("interested", job_applications.get(i).isInterested());
-                    m.addAttribute("status", job_applications.get(i).getStatus());
-                    m.addAttribute("terminal", job_applications.get(i).isTerminal());
-                    m.addAttribute("resume", job_applications.get(i).getResume());
-                    m.addAttribute("user", userDao.findByuserId(job_applications.get(i).getUserId()));
-
-                    applications.add(m);
-
-                }
-
-                all_applications.addAttribute("company_application", applications);
-
-                return new ResponseEntity(all_applications, HttpStatus.OK);
-
-            }else{
-                ModelMap m = new ModelMap();
-                m.addAttribute("msg", "Company does not exists");
-                return new ResponseEntity(m, HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-
-            ModelMap m = new ModelMap();
-            m.addAttribute("msg", "Method failure");
-            return new ResponseEntity(m, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-    public String getActiveCompanyApplications(int jobid) {
-        String res = "";
-        try {
-
-            JobOpening jobOpening = jobOpeningDao.findJobOpeningByJobId(jobid);
-
-            if (jobOpening != null) {
-                List<JobOpening_User> job_applications = jobOpening_userDao.getActiveCompanyApplications(jobid);
-                Object[] applications = new Object[job_applications.size()];
-
-
-                for(int i = 0; i < job_applications.size(); i++) {
-                    User user = userDao.findByuserId(job_applications.get(i).getUserId());
-                    res += user.getEmail() + ",";
-                }
-                return res;
-            }
-        } catch (Exception e) {
-
-            ModelMap m = new ModelMap();
-            throw new RuntimeException();
-        }
-
-        return res;
-    }
-
-    public ResponseEntity changeStatus(int applicationId, String status) {
-
-        try {
-
-            JobOpening_User jobOpening_user = jobOpening_userDao.findByJobUserId(applicationId);
-
-            if(status.contains("Company")){
-
-
-                if(status.contains("Cancel")) {
-                    if(jobOpening_user.getStatus().equals("Applied") || jobOpening_user.getStatus().equals("Offered") ||
-                            jobOpening_user.getStatus().contains("Schedule")){
-
-                        int jobId = jobOpening_user.getJobId();
-                        List<JobOpening_User> offerJobs = jobOpening_userDao.getOfferJobs(jobId);
-
-                        if(offerJobs.size() == 0){
-                            if(jobOpening_user.getStatus().equals("Applied")){
-                                User u = userDao.findByuserId(jobOpening_user.getUserId());
-                                int p = u.getPending_applications();
-                                u.setPending_applications(p-1);
-                                userDao.save(u);
-                            }
-
-                            jobOpening_user.setStatus(status);
-                            jobOpening_user.setTerminal(true);
-                            jobOpening_userDao.save(jobOpening_user);
-
-                            //Update Non terminal applications
-                            List<JobOpening_User> nonTerminal = jobOpening_userDao.getNonTerminalApplications(jobId);
-                            for(int i = 0; i < nonTerminal.size(); i++){
-                                nonTerminal.get(i).setInterested(false);
-                                nonTerminal.get(i).setStatus(status);
-                                jobOpening_userDao.save(nonTerminal.get(i));
-                            }
-
-                            User user = userDao.findByuserId(jobOpening_user.getUserId());
-                            ModelMap m = new ModelMap();
-                            m.addAttribute("status", "Cancelled by company");
-                            m.addAttribute("user", user);
-
-                            return new ResponseEntity(m, HttpStatus.OK);
-                        }else{
-                            ModelMap m = new ModelMap();
-                            m.addAttribute("code", 400);
-                            m.addAttribute("msg", "Job has one or more applications in offer accepted state");
-                            return new ResponseEntity(m, HttpStatus.BAD_REQUEST);
-                        }
-                    }else{
-                        System.out.println("cannot cancel");
-                        return new ResponseEntity("Cannot cancel", HttpStatus.BAD_REQUEST);
-                    }
-
-                }
-
-                if(status.contains("Schedule")) {
-                    if (jobOpening_user.getStatus().equals("Applied")) {
-
-                        if(jobOpening_user.getStatus().equals("Applied")){
-                            User u = userDao.findByuserId(jobOpening_user.getUserId());
-                            int p = u.getPending_applications();
-                            u.setPending_applications(p-1);
-                            userDao.save(u);
-                        }
-
-                        jobOpening_user.setStatus("Schedule Interview");
-                        jobOpening_userDao.save(jobOpening_user);
-
-                        User user = userDao.findByuserId(jobOpening_user.getUserId());
-                        ModelMap m = new ModelMap();
-                        m.addAttribute("status", "Schedule Interview");
-                        m.addAttribute("user", user);
-
-                        return new ResponseEntity(m, HttpStatus.OK);
-
-                    } else {
-                        System.out.println("cannot schedule");
-                        return new ResponseEntity("Cannot schedule", HttpStatus.BAD_REQUEST);
-                    }
-                }
-
-                if(status.contains("Reject")) {
-
-                    if(jobOpening_user.getStatus().equals("Applied") || jobOpening_user.getStatus().equals("Interview Accepted")){
-
-                        if(jobOpening_user.getStatus().equals("Applied")){
-                            User u = userDao.findByuserId(jobOpening_user.getUserId());
-                            int p = u.getPending_applications();
-                            u.setPending_applications(p-1);
-                            userDao.save(u);
-                        }
-
-                        jobOpening_user.setStatus("Rejected");
-                        jobOpening_user.setTerminal(true);
-                        jobOpening_userDao.save(jobOpening_user);
-
-                        User user = userDao.findByuserId(jobOpening_user.getUserId());
-                        ModelMap m = new ModelMap();
-                        m.addAttribute("status", "Rejected");
-                        m.addAttribute("user", user);
-
-                        return new ResponseEntity(m, HttpStatus.OK);
-                    }else{
-
-                        return new ResponseEntity("Cannot reject", HttpStatus.BAD_REQUEST);
-                    }
-                }
-
-
-                if(status.contains("Offered")) {
-
-                    if(jobOpening_user.getStatus().equals("Interview Accepted")){
-                        jobOpening_user.setStatus("Offered");
-                        jobOpening_userDao.save(jobOpening_user);
-
-                        User user = userDao.findByuserId(jobOpening_user.getUserId());
-                        ModelMap m = new ModelMap();
-                        m.addAttribute("status", "Offered");
-                        m.addAttribute("user", user);
-
-                        return new ResponseEntity(m, HttpStatus.OK);
-                    }else{
-
-                        return new ResponseEntity("Cannot reject", HttpStatus.BAD_REQUEST);
-                    }
-                }
-
-
-            }else if(status.contains("User")){
-
-                if(status.contains("Interview")) {
-
-                    if(status.contains("Accept")) {
-                        jobOpening_user.setStatus("Interview Accepted");
-                        jobOpening_userDao.save(jobOpening_user);
-
-                    }else if(status.contains("Refuse")){
-                        jobOpening_user.setStatus("Interview Refused");
-                        jobOpening_userDao.save(jobOpening_user);
-                    }
-                    return new ResponseEntity(HttpStatus.OK);
-                }
-
-                if(status.contains("Cancel")){
-
-                    if(jobOpening_user.getStatus().equals("Applied")){
-                        User u = userDao.findByuserId(jobOpening_user.getUserId());
-                        int p = u.getPending_applications();
-                        u.setPending_applications(p-1);
-                        userDao.save(u);
-                    }
-
-                    jobOpening_user.setStatus("Cancelled by user");
-                    jobOpening_userDao.save(jobOpening_user);
-                    return new ResponseEntity(HttpStatus.OK);
-                }
-
-                if(status.contains("Offer")){
-                    if(status.contains("Accepted")){
-                        jobOpening_user.setStatus("OfferAccepted");
-                        jobOpening_user.setTerminal(true);
-                        jobOpening_userDao.save(jobOpening_user);
-                        return new ResponseEntity(HttpStatus.OK);
-
-                    }else if(status.contains("Rejected")){
-                        jobOpening_user.setStatus("OfferRejected");
-                        jobOpening_user.setTerminal(true);
-                        jobOpening_userDao.save(jobOpening_user);
-                        return new ResponseEntity(HttpStatus.OK);
-                    }
-                }
-            }
-        } catch (Exception e) {
-
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity(HttpStatus.NOT_FOUND);
-    }
-
-
-    public ResponseEntity reApply(int applcId) {
-        try{
-
-            JobOpening_User existingApplication = jobOpening_userDao.findByJobUserId(applcId);
-            User u = userDao.findByuserId(existingApplication.getUserId());
-
-            int pending = u.getPending_applications();
-
-            if (pending < 5) {
-                pending = pending + 1;
-                u.setPending_applications(pending);
-                userDao.save(u);
-
-                existingApplication.setStatus("Applied");
-                existingApplication.setTerminal(false);
-                jobOpening_userDao.save(existingApplication);
-                return new ResponseEntity(existingApplication, HttpStatus.OK);
-
-            }else{
-                ModelMap m = new ModelMap();
-                m.addAttribute("msg", "too many pending applications");
-                return new ResponseEntity(m, HttpStatus.BAD_REQUEST);
-            }
-
-
-        }catch(Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
-
+    @Override
+    public List<JobOpening_User> getCompanyApplications(String company) {
+        return jobOpeningUserDAO.findAll().stream().filter(t -> t.getJobOpening().getCompany().getCompanyRef().equals(company)).collect(Collectors.toList());
     }
 
 }

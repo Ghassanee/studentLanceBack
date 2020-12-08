@@ -1,71 +1,64 @@
 package com.StudentLance.demo.Entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class JobOpening_User {
+public class JobOpening_User implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int jobUserId;
-    private int userId;
-    private int jobId;
-    private int companyId;
+    private long jobUserId;
+    private String jobUserRef;
+    @ManyToOne
+    private User user;
+    @ManyToOne
+    private JobOpening jobOpening;
     private String status;
     private boolean interested;
     private boolean terminal;
     private String resume ;
 
-    public String getResume() {
-        return resume;
-    }
 
-    public void setResume(String resume) {
-        this.resume = resume;
-    }
-
-    public JobOpening_User() {
-    }
-
-    
-    public JobOpening_User( int userId, int jobId, int companyId, String status, boolean interested, boolean terminal) {
-        this.userId = userId;
-        this.jobId = jobId;
-        this.companyId = companyId;
+    public JobOpening_User(String jobUserRef, User user, JobOpening jobOpening, String status, boolean interested, boolean terminal, String resume) {
+        this.jobUserRef = jobUserRef;
+        this.user = user;
+        this.jobOpening = jobOpening;
         this.status = status;
         this.interested = interested;
         this.terminal = terminal;
+        this.resume = resume;
     }
 
-    public int getJobUserId() {
+    public long getJobUserId() {
         return jobUserId;
     }
 
-    public void setJobUserId(int jobUserId) {
+    public void setJobUserId(long jobUserId) {
         this.jobUserId = jobUserId;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getJobUserRef() {
+        return jobUserRef;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setJobUserRef(String jobUserRef) {
+        this.jobUserRef = jobUserRef;
     }
 
-    public int getJobId() {
-        return jobId;
+    public User getUser() {
+        return user;
     }
 
-    public void setJobId(int jobId) {
-        this.jobId = jobId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getCompanyId() {
-        return companyId;
+    public JobOpening getJobOpening() {
+        return jobOpening;
     }
 
-    public void setCompanyId(int companyId) {
-        this.companyId = companyId;
+    public void setJobOpening(JobOpening jobOpening) {
+        this.jobOpening = jobOpening;
     }
 
     public String getStatus() {
@@ -90,5 +83,13 @@ public class JobOpening_User {
 
     public void setTerminal(boolean terminal) {
         this.terminal = terminal;
+    }
+
+    public String getResume() {
+        return resume;
+    }
+
+    public void setResume(String resume) {
+        this.resume = resume;
     }
 }
