@@ -1,22 +1,11 @@
 package com.StudentLance.demo.Services;
 
 import com.StudentLance.demo.DAO.CompanyDAO;
-import com.StudentLance.demo.DAO.InterviewDAO;
 import com.StudentLance.demo.Entity.Company;
-import com.StudentLance.demo.Entity.Interview;
-import com.StudentLance.demo.Entity.JobOpening;
 import com.StudentLance.demo.ServiceInterface.CompanyServiceInt;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.beans.ExceptionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 @Service
@@ -50,6 +39,7 @@ public class CompanyService implements CompanyServiceInt {
 
         }catch (Exception e){
             System.out.println("Creating company failed");
+            return null;
         }
         return companyDao.save(company);
     }
@@ -65,6 +55,7 @@ public class CompanyService implements CompanyServiceInt {
 
         }catch (Exception e){
             System.out.println("Updating company failed");
+            return null;
         }
         return companyDao.save(company);
 
@@ -79,6 +70,7 @@ public class CompanyService implements CompanyServiceInt {
 
         }catch (Exception e){
             System.out.println("failed to LogIn ");
+            return null;
         }
         return foundedEmail;
     }
