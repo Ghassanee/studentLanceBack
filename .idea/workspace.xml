@@ -2,33 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7565387a-11db-4158-a0f8-adf874fb6cf8" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__mysql_mysql_connector_java_8_0_21.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo.iml" afterPath="$PROJECT_DIR$/demo.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/CompanyDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/CompanyDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/InterviewDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/InterviewDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpeningDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpeningDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpening_UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpening_UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/UserDAO.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/UserDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/Company.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/Company.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/Interview.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/Interview.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening_User.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening_User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/User.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/CompanyRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/CompanyRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/UserRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/UserRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/CompanyServiceInt.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/CompanyServiceInt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/JobOpeningServiceInt.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/JobOpeningServiceInt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/JobOpeningUserServiceInt.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/JobOpeningUserServiceInt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/UserServiceInt.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/UserServiceInt.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/CompanyService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/CompanyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JobOpeningService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JobOpeningService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/UserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/application.properties" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
