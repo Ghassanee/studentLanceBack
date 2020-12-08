@@ -41,7 +41,7 @@ public class CompanyRest {
                 .body(null);
     }
 
-    @GetMapping("/{email}")
+    @GetMapping("/email/{email}")
     public  ResponseEntity<Company>  findByCompanyEmail(@PathVariable("email") String email){
         Company foundedCompany = companyService.findByCompanyEmail(email);
         return foundedCompany != null ? ResponseEntity.status(OK)

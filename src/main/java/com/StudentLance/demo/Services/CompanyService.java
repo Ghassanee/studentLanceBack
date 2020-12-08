@@ -46,17 +46,18 @@ public class CompanyService implements CompanyServiceInt {
 
     @Override
     public Company updateCompany(Company company){
+        Company foundedCompanyByRef = companyDao.findByCompanyRef(company.getCompanyRef());
+        Company foundedCompanyEmail = companyDao.findByCompanyEmail(company.getCompanyEmail());
 
         try {
-            Company foundedCompanyByRef = companyDao.findByCompanyRef(company.getCompanyRef());
-            Company foundedCompanyEmail = companyDao.findByCompanyEmail(company.getCompanyEmail());
             if (foundedCompanyByRef == null ) throw new Exception("Company Reference doesn't exist!:  "+ company.getCompanyRef());
-            else if (foundedCompanyEmail != null ) throw new Exception("Company Email already exist!:  " + company.getCompanyEmail());
+            else if (foundedCompanyEmail != null && !company.getCompanyRef().equals(foundedCompanyEmail.getCompanyRef()) ) throw new Exception("Company Email already exist!:  " + company.getCompanyEmail());
 
         }catch (Exception e){
             System.out.println("Updating company failed");
             return null;
         }
+        companyDao.delete(foundedCompanyByRef);
         return companyDao.save(company);
 
     }

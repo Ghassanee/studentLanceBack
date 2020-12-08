@@ -38,7 +38,7 @@ public class InterviewRest {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Interview> scheduleInterview(Interview interview){
+    public ResponseEntity<Interview> scheduleInterview(@RequestBody  Interview interview){
         return ResponseEntity.status(OK)
                 .body(interviewService.scheduleInterview(interview));
     }
