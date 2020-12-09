@@ -59,8 +59,7 @@ public class UserRest {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> create( @PathVariable("imageFile") MultipartFile file ) throws IOException {
-        User user = new User();
+    public ResponseEntity<User> create( @RequestPart(required=true) User user, @RequestPart(value="file", required = true)  MultipartFile file ) throws IOException {
         if (file != null) {
             user.setPhoto(imageUploadService.uplaodImage(file));
         }
