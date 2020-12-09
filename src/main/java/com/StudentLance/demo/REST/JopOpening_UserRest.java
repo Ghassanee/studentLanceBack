@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -20,56 +22,83 @@ public class JopOpening_UserRest {
 
     @GetMapping("/{ref}")
     public ResponseEntity<JobOpening_User> findByJobUserRef(@PathVariable("ref") String ref) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findByJobUserRef(ref));
+        JobOpening_User JobOpeningUser = jobOpeningUserService.findByJobUserRef(ref);
+        return JobOpeningUser != null ? ResponseEntity.status(OK)
+                .body(JobOpeningUser)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/job&user/{jobOpening}/{user}")
     public ResponseEntity<JobOpening_User> findByJobOpeningAndUser(@PathVariable("jobOpening") String jobOpening,@PathVariable("user") String user) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findByJobOpeningAndUser(jobOpening, user));
+        JobOpening_User createdJobOpeningUser = jobOpeningUserService.findByJobOpeningAndUser(jobOpening, user);
+        return createdJobOpeningUser != null ? ResponseEntity.status(OK)
+                .body(createdJobOpeningUser)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/user/{user}")
-    public ResponseEntity<List<JobOpening_User>> findAllByUser(@PathVariable("user") String user) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findAllByUser(user));
+    public ResponseEntity <List<JobOpening_User>> findAllByUser(@PathVariable("user") String user) {
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findAllByUser(user);
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/jobOpening/{jobOpening}")
     public ResponseEntity<List<JobOpening_User>> findAllByJobOpening(@PathVariable("jobOpening") String jobOpening) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findAllByJobOpening(jobOpening));
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findAllByJobOpening(jobOpening);
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/terminal")
     public ResponseEntity<List<JobOpening_User>> findTerminalTrue() {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findTerminalTrue());
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findTerminalTrue();
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/status/{status}")
     public ResponseEntity<List<JobOpening_User>> findByStatus(@PathVariable("status") String status) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findByStatus(status));
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findByStatus(status);
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/interested")
     public ResponseEntity<List<JobOpening_User>> findByInterestedTrue() {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findByInterestedTrue());
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findByInterestedTrue();
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/")
     public ResponseEntity<List<JobOpening_User>> findAll() {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.findAll());
+        List<JobOpening_User> jobOpeningUsers = jobOpeningUserService.findAll();
+        return jobOpeningUsers != null ? ResponseEntity.status(OK)
+                .body(jobOpeningUsers)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
-    @PutMapping("/")
+    @PostMapping("/")
     public ResponseEntity<JobOpening_User> applyToJob(@RequestBody JobOpening_User jobOpening_user) {
-        return ResponseEntity.status(OK)
-                .body(jobOpeningUserService.applyToJob(jobOpening_user));
+        JobOpening_User createdJobOpeningUser = jobOpeningUserService.applyToJob(jobOpening_user);
+        return createdJobOpeningUser != null ? ResponseEntity.status(OK)
+                .body(createdJobOpeningUser)
+                :ResponseEntity.status(FORBIDDEN)
+                .body(null);
     }
 
 

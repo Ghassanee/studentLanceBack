@@ -34,7 +34,7 @@ public class ImageUploadService implements ImageUploadServiceInt {
         return img;
     }
 
-    static byte[] compressBytes(byte[] data){
+    private static byte[] compressBytes(byte[] data){
         Deflater deflater = new Deflater();
         deflater.setInput(data);
         deflater.finish();
@@ -47,12 +47,12 @@ public class ImageUploadService implements ImageUploadServiceInt {
         try {
             outputStream.close();
         } catch (IOException e) {
+            return null;
         }
-        System.out.println("Compressed Image Byte Size - " + outputStream.toByteArray().length);
         return outputStream.toByteArray();
     }
 
-    static byte[] decompressBytes(byte[] data) {
+    private static byte[] decompressBytes(byte[] data) {
         Inflater inflater = new Inflater();
         inflater.setInput(data);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
@@ -63,8 +63,8 @@ public class ImageUploadService implements ImageUploadServiceInt {
                 outputStream.write(buffer, 0, count);
             }
             outputStream.close();
-        } catch (IOException ioe) {
-        } catch (DataFormatException e) {
+        } catch (IOException | DataFormatException ioe ) {
+            return null;
         }
         return outputStream.toByteArray();
     }

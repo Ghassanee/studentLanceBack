@@ -3,12 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="7565387a-11db-4158-a0f8-adf874fb6cf8" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/CompanyRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/CompanyRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/UserRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/UserRest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/CompanyService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/CompanyService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JobOpeningService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JobOpeningService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/UserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/UserService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,13 +26,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JobOpeningRest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JobOpeningRest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="186">
-              <caret line="77" column="98" lean-forward="false" selection-start-line="77" selection-start-column="98" selection-end-line="77" selection-end-column="98" />
+            <state relative-caret-position="170">
+              <caret line="28" column="28" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="28" selection-end-column="28" />
               <folding>
-                <element signature="method#findByJobOpeningRef#0;class#JobOpeningRest#0" expanded="false" />
                 <element signature="method#findByTitle#0;class#JobOpeningRest#0" expanded="false" />
                 <element signature="method#findByDescription#0;class#JobOpeningRest#0" expanded="false" />
                 <element signature="method#findByResponsibilities#0;class#JobOpeningRest#0" expanded="false" />
@@ -49,6 +44,16 @@
                 <element signature="method#createJobOpening#0;class#JobOpeningRest#0" expanded="false" />
                 <element signature="method#updateJob#0;class#JobOpeningRest#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="JopOpening_UserRest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="382">
+              <caret line="63" column="28" lean-forward="false" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,12 +106,10 @@
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/ImageUploadService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/CompanyServiceInt.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/JobOpeningUserServiceInt.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/InterviewService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpeningDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/JobOpening_UserDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/InterviewRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/UserDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/ServiceInterface/UserServiceInt.java" />
@@ -117,6 +120,8 @@
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/UserRest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JobOpeningService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java" />
       </list>
     </option>
   </component>
@@ -374,7 +379,17 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening_User.java</url>
+          <line>21</line>
+          <properties class="com.StudentLance.demo.Entity.JobOpening_User" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -402,7 +417,7 @@
         <state relative-caret-position="80">
           <caret line="8" column="13" lean-forward="false" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -452,7 +467,7 @@
         <state relative-caret-position="368">
           <caret line="25" column="8" lean-forward="true" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -526,13 +541,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening_User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" column="21" lean-forward="false" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/exception/MvcConfig.java" />
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -580,13 +588,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/DAO/CompanyDAO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
@@ -629,23 +630,6 @@
         <state relative-caret-position="320">
           <caret line="32" column="31" lean-forward="true" selection-start-line="32" selection-start-column="31" selection-end-line="32" selection-end-column="31" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-          <folding>
-            <element signature="method#findByJobOpeningAndUser#0;class#JopOpeningUserService#0" expanded="false" />
-            <element signature="method#findByJobUserRef#0;class#JopOpeningUserService#0" expanded="false" />
-            <element signature="method#findAllByUser#0;class#JopOpeningUserService#0" expanded="false" />
-            <element signature="method#findAllByJobOpening#0;class#JopOpeningUserService#0" expanded="false" />
-            <element signature="e#2774#2775#0" expanded="false" />
-            <element signature="e#2835#2836#0" expanded="false" />
-            <element signature="method#applyToJob#0;class#JopOpeningUserService#0" expanded="false" />
-            <element signature="method#getCompanyApplications#0;class#JopOpeningUserService#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,7 +700,7 @@
         <state relative-caret-position="32">
           <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -773,12 +757,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Services/JopOpeningUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="106" column="24" lean-forward="false" selection-start-line="106" selection-start-column="24" selection-end-line="106" selection-end-column="24" />
+          <folding>
+            <element signature="method#findByJobOpeningAndUser#0;class#JopOpeningUserService#0" expanded="false" />
+            <element signature="method#findByJobUserRef#0;class#JopOpeningUserService#0" expanded="false" />
+            <element signature="method#findAllByUser#0;class#JopOpeningUserService#0" expanded="false" />
+            <element signature="method#findAllByJobOpening#0;class#JopOpeningUserService#0" expanded="false" />
+            <element signature="method#getCompanyApplications#0;class#JopOpeningUserService#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/Entity/JobOpening_User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-208">
+          <caret line="6" column="13" lean-forward="false" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JobOpeningRest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="77" column="98" lean-forward="false" selection-start-line="77" selection-start-column="98" selection-end-line="77" selection-end-column="98" />
+        <state relative-caret-position="170">
+          <caret line="28" column="28" lean-forward="true" selection-start-line="24" selection-start-column="8" selection-end-line="28" selection-end-column="28" />
           <folding>
-            <element signature="method#findByJobOpeningRef#0;class#JobOpeningRest#0" expanded="false" />
             <element signature="method#findByTitle#0;class#JobOpeningRest#0" expanded="false" />
             <element signature="method#findByDescription#0;class#JobOpeningRest#0" expanded="false" />
             <element signature="method#findByResponsibilities#0;class#JobOpeningRest#0" expanded="false" />
@@ -791,6 +796,14 @@
             <element signature="method#createJobOpening#0;class#JobOpeningRest#0" expanded="false" />
             <element signature="method#updateJob#0;class#JobOpeningRest#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/StudentLance/demo/REST/JopOpening_UserRest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="382">
+          <caret line="63" column="28" lean-forward="false" selection-start-line="63" selection-start-column="28" selection-end-line="63" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>

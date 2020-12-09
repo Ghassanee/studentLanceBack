@@ -89,6 +89,11 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
     }
 
     @Override
+    public List<JobOpening_User> getCompanyApplications(String company) {
+        return jobOpeningUserDAO.findAll().stream().filter(t -> t.getJobOpening().getCompany().getCompanyRef().equals(company)).collect(Collectors.toList());
+    }
+
+    @Override
     public JobOpening_User applyToJob(JobOpening_User jobOpening_user) {
         try {
             JobOpening_User foundedJobUser = jobOpeningUserDAO.findByJobUserRef(jobOpening_user.getJobUserRef());
@@ -99,13 +104,10 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
             else if (foundedUser == null ) throw new Exception("User doesn't  exist!: getUserRef:  " + jobOpening_user.getUser().getUserRef());
         }catch (Exception e){
             System.out.println("Creating a JobOpening_User failed");
+            return null;
         }
         return jobOpeningUserDAO.save(jobOpening_user);
     }
 
-    @Override
-    public List<JobOpening_User> getCompanyApplications(String company) {
-        return jobOpeningUserDAO.findAll().stream().filter(t -> t.getJobOpening().getCompany().getCompanyRef().equals(company)).collect(Collectors.toList());
-    }
 
 }

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -21,26 +23,38 @@ public class InterviewRest {
 
     @GetMapping("/status/{status}")
     public ResponseEntity<List<Interview>> findAllByStatus(@PathVariable("status") String status) {
-        return ResponseEntity.status(OK)
-                .body(interviewService.findAllByStatus(status));
+        List<Interview> createdJobOpening = interviewService.findAllByStatus(status);
+        return createdJobOpening != null ? ResponseEntity.status(OK)
+                .body(createdJobOpening)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/{interviewRef}")
     public ResponseEntity<Interview> findByInterviewRef(@PathVariable("interviewRef") String interviewRef) {
-        return ResponseEntity.status(OK)
-                .body(interviewService.findByInterviewRef(interviewRef));
+        Interview createdJobOpening = interviewService.findByInterviewRef(interviewRef);
+        return createdJobOpening != null ? ResponseEntity.status(OK)
+                .body(createdJobOpening)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Interview>> findAll() {
-        return ResponseEntity.status(OK)
-                .body(interviewService.findAll());
+        List<Interview> createdJobOpening = interviewService.findAll();
+        return createdJobOpening != null ? ResponseEntity.status(OK)
+                .body(createdJobOpening)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
     }
 
     @PostMapping("/")
     public ResponseEntity<Interview> scheduleInterview(@RequestBody  Interview interview){
-        return ResponseEntity.status(OK)
-                .body(interviewService.scheduleInterview(interview));
+        Interview createdJobOpening = interviewService.scheduleInterview(interview);
+        return createdJobOpening != null ? ResponseEntity.status(OK)
+                .body(createdJobOpening)
+                :ResponseEntity.status(FORBIDDEN)
+                .body(null);
     }
 
 }
