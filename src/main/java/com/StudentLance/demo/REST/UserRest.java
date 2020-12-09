@@ -69,7 +69,7 @@ public class UserRest {
     }
 
     @PutMapping("/user/update")
-    public ResponseEntity<User> update(@RequestBody User user, @RequestParam("imageFile") MultipartFile file) throws IOException {
+    public ResponseEntity<User> update(@RequestPart(required=true) User user, @RequestPart(value="file", required = true)  MultipartFile file) throws IOException {
         if (file != null) {
             user.setPhoto(imageUploadService.uplaodImage(file));
         }
