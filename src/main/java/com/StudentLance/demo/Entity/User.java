@@ -26,7 +26,7 @@ public class User implements Serializable {
     @OneToMany
     private List<JobOpening_User> jobOpeningUserList;
 
-    public User(String userRef, String firstname, String lastname, String phone, String email, String password, String address, String introduction, float experience, String education, String status, String skills, ImageModel photo) {
+    public User(String userRef, String firstname, String lastname, String phone, String email, String password, String address, String introduction, float experience, String education, String status, String skills) {
         this.userRef = userRef;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -39,7 +39,7 @@ public class User implements Serializable {
         this.education = education;
         this.status = status;
         this.skills = skills;
-        this.photo = photo;
+        this.photo = new ImageModel();
         this.jobOpeningUserList = new ArrayList<>();
     }
 

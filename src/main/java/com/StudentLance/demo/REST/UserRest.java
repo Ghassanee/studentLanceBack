@@ -59,9 +59,18 @@ public class UserRest {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<User> create( @RequestPart(required=true) User user ) throws IOException {
+    public ResponseEntity<User> create( @RequestBody User user ) throws IOException {
         return ResponseEntity.status(OK)
                 .body(userService.createUser(user, true));
+    }
+    @PutMapping("/postImage")
+    public ResponseEntity<User> postImage(@RequestPart(required=true) String userRef ,@RequestPart(value="file", required = true)  MultipartFile file ) throws IOException {
+        User user = userService.findByUserRef(userRef);
+        if (file != null) {
+            user.setPhoto(imageUploadService.uplaodImage(file));
+        }
+        return ResponseEntity.status(OK)
+                .body(userService.updateUser(user));
     }
 
     @PutMapping("/user/update")
