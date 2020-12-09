@@ -1,5 +1,6 @@
 package com.StudentLance.demo.REST;
 
+import com.StudentLance.demo.Entity.ImageModel;
 import com.StudentLance.demo.Entity.Interview;
 import com.StudentLance.demo.Entity.User;
 import com.StudentLance.demo.Services.ImageUploadService;
@@ -56,6 +57,12 @@ public class UserRest {
     public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.status(OK)
                 .body(userService.findAll());
+    }
+
+    @GetMapping("/getImage")
+    public ResponseEntity<ImageModel> getImage(@RequestPart(required=true) String userRef ) throws IOException {
+        return ResponseEntity.status(OK)
+                .body(imageUploadService.getImage(userService.findByUserRef(userRef).getPhoto().getName()));
     }
 
     @PostMapping("/create")
