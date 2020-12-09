@@ -41,6 +41,15 @@ public class CompanyRest {
                 .body(null);
     }
 
+    @GetMapping("/company/login/{email}/{password}")
+    public ResponseEntity<Company> login(@PathVariable("email") String email, @PathVariable("password") String password) {
+        Company foundedCompany = companyService.login(email, password);
+        return foundedCompany != null ? ResponseEntity.status(OK)
+                .body(foundedCompany)
+                :ResponseEntity.status(NOT_FOUND)
+                .body(null);
+    }
+
     @GetMapping("/email/{email}")
     public  ResponseEntity<Company>  findByCompanyEmail(@PathVariable("email") String email){
         Company foundedCompany = companyService.findByCompanyEmail(email);
@@ -68,14 +77,6 @@ public class CompanyRest {
                 .body(null);
     }
 
-    @GetMapping("/company/login/{email}/{password}")
-    public ResponseEntity<Company> login(@PathVariable("email") String email, @PathVariable("password") String password) {
-        Company foundedCompany = companyService.login(email, password);
-        return foundedCompany != null ? ResponseEntity.status(OK)
-                .body(foundedCompany)
-                :ResponseEntity.status(NOT_FOUND)
-                .body(null);
-    }
 
 
 }

@@ -8,16 +8,9 @@ import com.StudentLance.demo.Entity.Company;
 import com.StudentLance.demo.Entity.JobOpening;
 import com.StudentLance.demo.Entity.JobOpening_User;
 import com.StudentLance.demo.ServiceInterface.JobOpeningServiceInt;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.*;
 
 @Service
@@ -29,31 +22,6 @@ public class JobOpeningService implements JobOpeningServiceInt{
     private CompanyDAO companyDAO;
     @Autowired
     private JobOpening_UserDAO jobOpening_userDAO ;
-
-    @Override
-    public JobOpening createJobOpening(JobOpening jobOpening, boolean create) {
-        try {
-            JobOpening foundedJobOpening = jobOpeningDao.findByJobOpeningRef(jobOpening.getJobOpeningRef());
-            Company foundedCompany = companyDAO.findByCompanyRef(jobOpening.getCompany().getCompanyRef());
-            if (foundedJobOpening != null && create ) throw new Exception("Job Opening Reference already exist!: JobOpeningRef:  "+ jobOpening.getJobOpeningRef());
-            else if (foundedJobOpening == null && !create ) throw new Exception("Job Opening Reference doesn't exist!: JobOpeningRef:  "+ jobOpening.getJobOpeningRef());
-            else if (foundedCompany == null ) throw new Exception("Company doesn't  exist!: CompanyRef:  " + jobOpening.getCompany().getCompanyRef());
-            else {
-                for (JobOpening_User j : jobOpening.getJobOpeningUserList()) {
-                    if (jobOpening_userDAO.findByJobUserRef(j.getJobUserRef()) == null)
-                        throw new Exception("One of JobUser Reference in JobUserList doesn't exist!: JobUserRef:  " + j.getJobUserRef());
-                }
-            }
-        }catch (Exception e){
-            System.out.println("Creating a JobOpening failed");
-        }
-        return jobOpeningDao.save(jobOpening);
-    }
-
-    @Override
-    public JobOpening updateJob(JobOpening jobOpening) {
-        return createJobOpening(jobOpening, false);
-    }
 
     @Override
     public List<JobOpening> findByTitle(String title) {
@@ -80,6 +48,7 @@ public class JobOpeningService implements JobOpeningServiceInt{
         return jobOpeningDao.findByStatus(status);
     }
 
+    @Override
     public List<JobOpening> findByCompany(String company){
         return jobOpeningDao.findByCompany(companyDAO.findByCompanyRef(company));
     }
@@ -99,9 +68,37 @@ public class JobOpeningService implements JobOpeningServiceInt{
         return jobOpeningDao.findAll();
     }
 
+    @Override
     public JobOpening findByJobOpeningRef(String jobOpeningRef){
         return jobOpeningDao.findByJobOpeningRef(jobOpeningRef);
     }
+
+    @Override
+    public JobOpening createJobOpening(JobOpening jobOpening, boolean create) {
+        try {
+            JobOpening foundedJobOpening = jobOpeningDao.findByJobOpeningRef(jobOpening.getJobOpeningRef());
+            Company foundedCompany = companyDAO.findByCompanyRef(jobOpening.getCompany().getCompanyRef());
+            if (foundedJobOpening != null && create ) throw new Exception("Job Opening Reference already exist!: JobOpeningRef:  "+ jobOpening.getJobOpeningRef());
+            else if (foundedJobOpening == null && !create ) throw new Exception("Job Opening Reference doesn't exist!: JobOpeningRef:  "+ jobOpening.getJobOpeningRef());
+            else if (foundedCompany == null ) throw new Exception("Company doesn't  exist!: CompanyRef:  " + jobOpening.getCompany().getCompanyRef());
+            else {
+                for (JobOpening_User j : jobOpening.getJobOpeningUserList()) {
+                    if (jobOpening_userDAO.findByJobUserRef(j.getJobUserRef()) == null)
+                        throw new Exception("One of JobUser Reference in JobUserList doesn't exist!: JobUserRef:  " + j.getJobUserRef());
+                }
+            }
+        }catch (Exception e){
+            System.out.println("Creating a JobOpening failed");
+            return null;
+        }
+        return jobOpeningDao.save(jobOpening);
+    }
+
+    @Override
+    public JobOpening updateJob(JobOpening jobOpening) {
+        return createJobOpening(jobOpening, false);
+    }
+
 
 
 

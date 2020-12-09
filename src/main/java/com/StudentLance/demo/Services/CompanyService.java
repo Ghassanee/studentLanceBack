@@ -57,9 +57,7 @@ public class CompanyService implements CompanyServiceInt {
             System.out.println("Updating company failed");
             return null;
         }
-        companyDao.delete(foundedCompanyByRef);
         return companyDao.save(company);
-
     }
 
     @Override

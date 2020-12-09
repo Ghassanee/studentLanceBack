@@ -47,6 +47,7 @@ public class UserService implements UserServiceInt{
 
         }catch (Exception e){
             System.out.println("failed to create/update a  User ");
+            return null;
         }
         return userDao.save(user);
     }
@@ -65,6 +66,7 @@ public class UserService implements UserServiceInt{
 
         }catch (Exception e){
             System.out.println("failed to LogIn ");
+            return null;
         }
         return foundedEmail;
     }
