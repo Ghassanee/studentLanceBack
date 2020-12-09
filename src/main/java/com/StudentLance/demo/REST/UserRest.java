@@ -53,7 +53,7 @@ public class UserRest {
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Interview>> findAll() {
+    public ResponseEntity<List<User>> findAll() {
         return ResponseEntity.status(OK)
                 .body(userService.findAll());
     }

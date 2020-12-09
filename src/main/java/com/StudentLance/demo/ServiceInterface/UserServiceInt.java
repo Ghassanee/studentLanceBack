@@ -24,7 +24,7 @@ public interface UserServiceInt {
 
     List<Interview> getUserInterviews(String userRef);
 
-    List<Interview> findAll();
+    List<User> findAll();
 
 
 }

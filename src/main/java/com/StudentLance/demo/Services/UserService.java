@@ -75,7 +75,7 @@ public class UserService implements UserServiceInt{
     }
 
     @Override
-    public List<Interview> findAll() {
-        return interviewDAO.findAll();
+    public List<User> findAll() {
+        return userDao.findAll();
     }
 }
