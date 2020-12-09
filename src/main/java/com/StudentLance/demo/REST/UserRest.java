@@ -52,8 +52,14 @@ public class UserRest {
                 .body(userService.login(email, password));
     }
 
+    @GetMapping("/")
+    public ResponseEntity<List<Interview>> findAll() {
+        return ResponseEntity.status(OK)
+                .body(userService.findAll());
+    }
+
     @PostMapping("/create")
-    public ResponseEntity<User> create( @ModelAttribute("imageFile") MultipartFile file ) throws IOException {
+    public ResponseEntity<User> create( @PathVariable("imageFile") MultipartFile file ) throws IOException {
         User user = new User();
         if (file != null) {
             user.setPhoto(imageUploadService.uplaodImage(file));

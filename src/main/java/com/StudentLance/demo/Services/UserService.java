@@ -73,4 +73,9 @@ public class UserService implements UserServiceInt{
     public List<Interview> getUserInterviews(String userRef) {
         return interviewDAO.findByUser(userDao.findByUserRef(userRef));
     }
+
+    @Override
+    public List<Interview> findAll() {
+        return interviewDAO.findAll();
+    }
 }
