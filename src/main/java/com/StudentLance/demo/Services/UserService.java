@@ -42,8 +42,8 @@ public class UserService implements UserServiceInt{
         try {
             if (foundedRef != null && create) throw new Exception("User Reference already exist, User Ref :" + user.getUserRef());
             else if (foundedRef == null && !create) throw new Exception("User doesn't exist, User Ref :" + user.getUserRef());
-            else if (foundedEmail != null) throw new Exception("User Email already exist, Email  :" + user.getEmail());
-            else if (foundedPhone != null) throw new Exception("User Phone already exist, Phone :" + user.getPhone());
+            // else if (foundedEmail != null) throw new Exception("User Email already exist, Email  :" + user.getEmail());
+            // else if (foundedPhone != null) throw new Exception("User Phone already exist, Phone :" + user.getPhone());
 
         }catch (Exception e){
             System.out.println("failed to create/update a  User ");
