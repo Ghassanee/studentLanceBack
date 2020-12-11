@@ -59,7 +59,7 @@ public class CompanyRest {
                 .body(null);
     }
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<Company> createCompany(@RequestBody Company company) {
         Company createdCompany = companyService.createCompany(company);
         return createdCompany != null ? ResponseEntity.status(OK)
