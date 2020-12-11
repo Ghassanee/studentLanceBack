@@ -103,7 +103,9 @@ public class UserRest {
     @PutMapping("/postImage")
     public ResponseEntity<User> postImage(@RequestPart(required=true) String userRef ,@RequestPart(value="file", required = true)  MultipartFile file ) throws IOException {
         User user = userService.findByUserRef(userRef);
-        if (file != null) user.setPhoto(imageUploadService.uplaodImage(file));
+        if (user == null ) return ResponseEntity.status(FORBIDDEN)
+                .body(null);
+        if (file != null ) user.setPhoto(imageUploadService.uplaodImage(file));
         User createdUser = userService.updateUser(user);
         return createdUser != null ? ResponseEntity.status(OK)
                 .body(createdUser)
