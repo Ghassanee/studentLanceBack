@@ -61,7 +61,7 @@ public class UserService implements UserServiceInt{
     public User login(String email, String password) {
         User foundedEmail = userDao.findByEmail(email);
         try {
-            if (foundedEmail != null) throw new Exception("User Email doesn't exist, Email  :" + email);
+            if (foundedEmail == null) throw new Exception("User Email doesn't exist, Email  :" + email);
             if (!foundedEmail.getPassword().equals(password)) throw new Exception("Password and Email don't match  " );
 
         }catch (Exception e){
