@@ -106,6 +106,8 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
             System.out.println("Creating a JobOpening_User failed");
             return null;
         }
+        foundedJobOpening.setJobOpeningUserList(foundedJobOpening.getJobOpeningUserList().add(jobOpening_user));
+        jobOpeningDAO.save(foundedJobOpening);
         return jobOpeningUserDAO.save(jobOpening_user);
     }
 
