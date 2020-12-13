@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.annotations.Cascade;
+import javax.persistence.CascadeType;
 import org.hibernate.annotations.CascadeType;
 @Entity
 public class JobOpening implements Serializable {
