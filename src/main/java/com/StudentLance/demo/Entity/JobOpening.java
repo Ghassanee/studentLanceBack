@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 @Entity
 public class JobOpening implements Serializable {
     @Id
@@ -19,7 +20,7 @@ public class JobOpening implements Serializable {
     private String location;
     private int salary;
     private String status;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<JobOpening_User> jobOpeningUserList;
 
     public JobOpening() {
