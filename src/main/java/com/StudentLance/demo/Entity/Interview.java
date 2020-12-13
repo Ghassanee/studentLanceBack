@@ -19,7 +19,9 @@ public class Interview implements Serializable {
     private Date time;
     private String feedback;
 
+    public Interview(){
 
+}
     public Interview(String interviewRef, User user, JobOpening jobOpening, String status, String location, Date time, String feedback) {
         this.interviewRef = interviewRef;
         this.user = user;

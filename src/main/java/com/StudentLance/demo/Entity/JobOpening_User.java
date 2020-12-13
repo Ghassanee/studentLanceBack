@@ -18,7 +18,9 @@ public class JobOpening_User implements Serializable {
     private boolean terminal;
     private String resume ;
 
-
+    public JobOpening_User(){
+        
+    }
     public JobOpening_User(String jobUserRef, User user, JobOpening jobOpening, String status, boolean interested, boolean terminal, String resume) {
         this.jobUserRef = jobUserRef;
         this.user = user;
