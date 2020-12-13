@@ -95,9 +95,10 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
 
     @Override
     public JobOpening_User applyToJob(JobOpening_User jobOpening_user) {
+        JobOpening foundedJobOpening;
         try {
             JobOpening_User foundedJobUser = jobOpeningUserDAO.findByJobUserRef(jobOpening_user.getJobUserRef());
-            JobOpening foundedJobOpening = jobOpeningDAO.findByJobOpeningRef(jobOpening_user.getJobOpening().getJobOpeningRef());
+            foundedJobOpening = jobOpeningDAO.findByJobOpeningRef(jobOpening_user.getJobOpening().getJobOpeningRef());
             User foundedUser = userDAO.findByUserRef(jobOpening_user.getUser().getUserRef());
             if (foundedJobUser != null ) throw new Exception("JobUser Reference already exist!: getJobUserRef:  "+ jobOpening_user.getJobUserRef());
             else if (foundedJobOpening == null  ) throw new Exception("Job Opening Reference doesn't exist!: JobOpeningRef:  "+ jobOpening_user.getJobOpening().getJobOpeningRef());
