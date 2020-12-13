@@ -112,8 +112,9 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
         jobOpeningUserList = foundedJobOpening.getJobOpeningUserList();
         jobOpeningUserList.add(jobOpening_user);
         foundedJobOpening.setJobOpeningUserList(jobOpeningUserList);
+        jobOpeningUserDAO.save(jobOpening_user)
         jobOpeningDAO.save(foundedJobOpening);
-        return jobOpeningUserDAO.save(jobOpening_user);
+        return jobOpening_user;
     }
 
 
