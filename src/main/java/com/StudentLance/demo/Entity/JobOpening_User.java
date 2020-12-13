@@ -2,7 +2,7 @@ package com.StudentLance.demo.Entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 public class JobOpening_User implements Serializable {
     @Id
