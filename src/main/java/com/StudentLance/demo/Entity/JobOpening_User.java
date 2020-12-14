@@ -1,8 +1,9 @@
 package com.StudentLance.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity
 public class JobOpening_User implements Serializable {
     @Id
@@ -12,7 +13,7 @@ public class JobOpening_User implements Serializable {
     @JsonIgnore
     @ManyToOne
     private User user;
-    
+
     @JsonIgnore
     @ManyToOne
     private JobOpening jobOpening;
