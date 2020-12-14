@@ -1,5 +1,6 @@
 package com.StudentLance.demo.Services;
 
+import com.StudentLance.demo.DAO.CompanyDAO;
 import com.StudentLance.demo.DAO.JobOpeningDAO;
 import com.StudentLance.demo.DAO.JobOpening_UserDAO;
 import com.StudentLance.demo.DAO.UserDAO;
@@ -24,6 +25,9 @@ public class JopOpeningUserService implements JobOpeningUserServiceInt {
 
     @Autowired
     private JobOpening_UserDAO jobOpeningUserDAO;
+
+    @Autowired
+    private CompanyDAO companyDAO;
 
 
     @Override
