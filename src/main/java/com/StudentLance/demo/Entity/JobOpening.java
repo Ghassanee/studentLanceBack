@@ -5,8 +5,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 @Entity
 public class JobOpening implements Serializable {
     @Id
@@ -23,7 +24,7 @@ public class JobOpening implements Serializable {
     private int salary;
     private String status;
 
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     @OneToMany(cascade = CascadeType.ALL)
     private List<JobOpening_User> jobOpeningUserList;
 
