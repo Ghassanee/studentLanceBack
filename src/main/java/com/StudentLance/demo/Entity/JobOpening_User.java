@@ -1,6 +1,5 @@
 package com.StudentLance.demo.Entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,11 +9,9 @@ public class JobOpening_User implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long jobUserId;
     private String jobUserRef;
-    @JsonIgnore
     @ManyToOne
     private User user;
 
-    @JsonIgnore
     @ManyToOne
     private JobOpening jobOpening;
     private String status;

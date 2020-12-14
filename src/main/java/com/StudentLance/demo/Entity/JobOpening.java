@@ -5,12 +5,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class JobOpening implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long jobId;
     private String jobOpeningRef;
+
     @ManyToOne
     private Company company;
     private String title;
@@ -19,6 +22,8 @@ public class JobOpening implements Serializable {
     private String location;
     private int salary;
     private String status;
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<JobOpening_User> jobOpeningUserList;
 

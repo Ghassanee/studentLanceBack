@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity(name = "user_entity")
 public class User implements Serializable {
@@ -23,6 +24,7 @@ public class User implements Serializable {
     private String status;
     private String skills;
     private ImageModel photo;
+    @JsonIgnore
     @OneToMany
     private List<JobOpening_User> jobOpeningUserList;
 
